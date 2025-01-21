@@ -19,14 +19,9 @@ def create_airtable_record(test_client, base_id, table_name, record, api_key):
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
-    url = f"/api/{base_id}/{table_name}"
+    url = f"/api/{base_id}/{table_name}/create"
     response = test_client.post(url, json=record, headers=headers)
     return response
-
-def test_get_airtable_tables():
-    response = client.get("/api/airtable/test_base_id/test_table_name")
-    assert response.status_code == 200
-    assert "records" in response.json()
 
 def test_get_airtable_tables(test_client: TestClient, airtable_base_id, airtable_table_name, airtable_api_key):
     headers = {
@@ -72,7 +67,7 @@ def test_delete_airtable_record(test_client: TestClient, airtable_base_id, airta
     assert delete_response.json()["message"] == "Record deleted successfully"
 
 def test_full_crud_operations(test_client: TestClient, airtable_base_id, airtable_table_name, airtable_record, airtable_api_key):
-        # Create a record
+    # Create a record
     create_response = create_airtable_record(test_client, airtable_base_id, airtable_table_name, airtable_record, airtable_api_key)
     assert create_response.status_code == 200
     record_id = create_response.json()["id"]

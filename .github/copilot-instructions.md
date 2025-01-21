@@ -12,8 +12,8 @@ This is the backend that serves data from a number of data sources
 - Airtable
 - Interface to GIS platform
 
----
-
+#### Coding setup
+If providing terminal commands always provide them in PowerShell format
 
 #### Folder Structure
 The folder structure is as follows:

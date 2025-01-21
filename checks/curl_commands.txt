@@ -1,0 +1,7 @@
+Invoke-RestMethod -Uri "http://localhost:8000/api/app4p8WX4X6BRjei8/Testing/create" -Method POST -Body '{"name":"Test Record","value":123}' -ContentType "application/json"
+
+Invoke-RestMethod -Uri "http://localhost:8000/api/app4p8WX4X6BRjei8/Testing/recccGskEtjv59Hxx" -Method DELETE
+
+
+Invoke-RestMethod -Uri "http://localhost:8000/api/app4p8WX4X6BRjei8/Testing/rece1Isd5T6NZUAnt" -Method GET
+
