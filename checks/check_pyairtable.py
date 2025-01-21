@@ -13,8 +13,8 @@ api = Api(api_key)
 table = api.table(base_id, table_name)
 
 record = {
-        "name": "bloody hell it works",  # Match Airtable column names
-        "value": 123           # Match Airtable column names
+    "name": "bloody hell it works",  # Match Airtable column names
+    "value": 123           # Match Airtable column names
 }
 
 response = table.create(record)

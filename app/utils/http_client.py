@@ -29,18 +29,4 @@ ch.setFormatter(formatter)
 logger.addHandler(fh)
 logger.addHandler(ch)
 
-def make_request(method: str, url: str, headers: dict, params: dict = None, json: dict = None):
-    logger.debug(f"Entering make_request with method: {method}, url: {url}, headers: {headers}, params: {params}, json: {json}")
-    if json:
-        json = {"fields": json}
-    logger.debug(f"[utils/http_client.py] Making {method} request to {url}")
-    logger.debug(f"[utils/http_client.py] Headers: {headers}")
-    logger.debug(f"[utils/http_client.py] Payload: {json}")
-
-    response = requests.request(method, url, headers=headers, params=params, json=json)
-
-    logger.debug(f"[utils/http_client.py] Response: {response.json()}")
-    logger.debug(f"Exiting make_request with response: {response.json()}")
-
-    response.raise_for_status()
-    return response.json()
+# This file can be removed or updated if it contains other utility functions.
