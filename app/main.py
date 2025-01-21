@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.endpoints import airtable
+from app.api.endpoints import airtable_endpoints
 from app.core.settings import settings
 from dotenv import load_dotenv
 import logging
@@ -19,7 +19,7 @@ logging.basicConfig(
 app = FastAPI()
 
 # Include routes
-app.include_router(airtable.router, prefix="/api", tags=["Airtable"])
+app.include_router(airtable_endpoints.router, prefix="/api", tags=["Airtable"])
 
 # ...existing code...
 

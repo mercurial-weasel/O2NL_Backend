@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 import logging
 from app.core.settings import settings
-from app.api.dependencies.airtable import get_airtable_service
-from app.services.airtable import AirtableService
-from app.schemas.airtable import AirtableTableResponse, AirtableRecord, AirtableRecordCreate
+from app.api.dependencies.airtable_dependencies import get_airtable_service
+from app.services.airtable_services import AirtableService
+from app.schemas.airtable_schemas import AirtableTableResponse, AirtableRecord, AirtableRecordCreate
 
 # Setup logging to file
 logging.basicConfig(filename='airtable_debug.log', level=logging.DEBUG, 

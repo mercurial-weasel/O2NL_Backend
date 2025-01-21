@@ -1,4 +1,4 @@
-from app.services.airtable import AirtableService
+from app.services.airtable_services import AirtableService
 from app.core.settings import settings
 
 def get_airtable_service():

@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
-from app.schemas.airtable import AirtableRecordCreate
+from app.schemas.airtable_schemas import AirtableRecordCreate
 import logging
 
 client = TestClient(app)
@@ -24,6 +24,11 @@ def create_airtable_record(test_client, base_id, table_name, record, api_key):
     response = test_client.post(url, json=record, headers=headers)
     logger.debug(f"Received response: {response.json()}")
     return response
+
+def test_get_airtable_tables():
+    response = client.get("/api/airtable/test_base_id/test_table_name")
+    assert response.status_code == 200
+    assert "records" in response.json()
 
 def test_get_airtable_tables(test_client: TestClient, airtable_base_id, airtable_table_name, airtable_api_key):
     logger.info("Testing GET /api/{base_id}/{table_name}")
