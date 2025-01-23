@@ -27,9 +27,9 @@ root/
 │   │   └── __init__.py      # API initialization
 │   ├── core/                # Core application logic (e.g., settings, logging)
 │   ├── models/              # ORM models
+│   ├── schemas/             # Pydantic models for request/response validation
 │   ├── services/            # Business logic
 │   ├── utils/               # Helper functions
-│   ├── schemas/             # Pydantic models for request/response validation
 │   └── main.py              # Application entry point
 ├── tests/                   # Test cases
 │   ├── unit/                # Unit tests

@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 import logging
+from typing import Optional
 from app.core.settings import settings
 from app.api.dependencies.airtable_dependencies import get_airtable_service
 from app.services.airtable_services import AirtableService
@@ -10,6 +11,23 @@ logging.basicConfig(filename='airtable_debug.log', level=logging.DEBUG,
                     format='%(asctime)s - %(pathname)s - %(levelname)s - %(message)s')
 
 router = APIRouter()
+
+@router.get("/geo/spt/filtered-sorted", response_model=AirtableTableResponse)
+def get_filtered_sorted_records_geo_spt(
+    point_id: Optional[str] = Query(None),
+    zone: Optional[str] = Query(None),
+    sort_by: Optional[str] = Query("Material"),
+    airtable_service: AirtableService = Depends(get_airtable_service),
+):
+    base_id = "app4p8WX4X6BRjei8"
+    table_name = "Field_SPT"
+    logging.debug(f"Entering get_filtered_sorted_records endpoint for base_id: {base_id}, table_name: {table_name}")
+    try:
+        data = airtable_service.get_filtered_sorted_records(base_id, table_name, point_id, zone, sort_by)
+        return {"records": data}
+    except Exception as e:
+        logging.error(f"Error in get_filtered_sorted_records endpoint: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/{base_id}/{table_name}", response_model=AirtableTableResponse)
 def get_table(
@@ -98,3 +116,4 @@ async def check_airtable_connection():
     except Exception as e:
         logging.error(f"Connection failed: {str(e)}")
         return {"success": False, "message": "Connection failed", "error": str(e)}
+

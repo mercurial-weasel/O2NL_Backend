@@ -98,3 +98,11 @@ def test_full_crud_operations(test_client: TestClient, airtable_base_id, airtabl
     delete_response = test_client.delete(f"/api/{airtable_base_id}/{airtable_table_name}/{record_id}", headers=headers)
     assert delete_response.status_code == 200
     assert delete_response.json()["message"] == "Record deleted successfully"
+
+def test_get_filtered_sorted_records_geo_spt(test_client: TestClient, airtable_api_key):
+    headers = {
+        "Authorization": f"Bearer {airtable_api_key}",
+    }
+    response = test_client.get(f"/api/geo/spt/filtered-sorted?point_id=BH501&zone=Zone5&sort_by=Material", headers=headers)
+    assert response.status_code == 200
+    assert isinstance(response.json()["records"], list)

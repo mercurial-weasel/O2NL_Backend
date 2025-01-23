@@ -5,17 +5,28 @@ import os
 # Load environment variables from .env file
 load_dotenv()
 
+# Airtable API key
 api_key = os.getenv("AIRTABLE_API_KEY")
-base_id = os.getenv("AIRTABLE_BASE_ID")
-table_name = os.getenv("AIRTABLE_TABLE_NAME")
 
+# Define base ID and table name
+base_id = "app4p8WX4X6BRjei8"
+table_name = "Field_SPT"
+
+# Initialize the API and table
 api = Api(api_key)
 table = api.table(base_id, table_name)
 
-record = {
-    "name": "bloody hell it works",  # Match Airtable column names
-    "value": 123           # Match Airtable column names
-}
+# Define filter and sort parameters
+filter_formula = "AND({POINT_ID} = 'BH501', {Zone} = 'Zone5')"
+sort = ["Material"]
 
-response = table.create(record)
-print(response)
+# Fetch records with pagination using iterate()
+all_records = []
+for record in table.iterate(formula=filter_formula, sort=sort, page_size=5):
+    all_records.append(record)
+
+# Print the records
+print(all_records)
+
+# Print summary
+print(f"Total records retrieved: {len(all_records)}")
